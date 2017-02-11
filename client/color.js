@@ -1,11 +1,16 @@
 $(document).ready(function(){
-  $('#clickHere').on('click', function() {
-    changeColor()
-  })
+  $('#clickHere').on('click', change.color)
 });
 
-function changeColor(){
-  console.log('change color');
-  let colors = 'rgb(255,255,255)'
-  $('#box1').css('background-color', colors)
+let change = {
+  color: function(){
+    console.log('change color');
+    $.ajax({
+      method: 'GET',
+      url: 'http://localhost:3000/api/color',
+      success: function(data){
+        $(data.box).css('background-color', data.color)
+      }
+    })
+  }
 }
